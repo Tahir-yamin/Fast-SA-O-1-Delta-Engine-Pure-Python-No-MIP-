@@ -28,12 +28,12 @@ flowchart TD
     classDef validation fill:#276749,stroke:#68d391,stroke-width:2px,color:white
     classDef penalty fill:#742a2a,stroke:#fc8181,stroke-width:2px,color:white
     
-    A[Stochastic Meta-Heuristic Engine<br/>Simulated Annealing]:::abstract_space
+    A["Stochastic Meta-Heuristic Engine<br/>Simulated Annealing"]:::abstract_space
     
     subgraph Profile Search Space [Dimensional Occupancy Generation]
     direction TB
-    B[Generate Continuous Occupancy Delta<br/>Δ Day N +/- variance]:::abstract_space
-    C{Is Occupancy between<br/> 125 and 300?}:::abstract_space
+    B["Generate Continuous Occupancy Delta<br/>Δ Day N +/- variance"]:::abstract_space
+    C{"Is Occupancy between<br/> 125 and 300?"}:::abstract_space
     B --> C
     C -- No --> B
     end
@@ -42,9 +42,9 @@ flowchart TD
     
     subgraph Persistent Oracle [High-Speed GLOP LP Matrix]
     direction TB
-    D[Hot-Swap Matrix Constraints<br/>SetBounds() per Delta]:::lp_space
-    E[Solve Continuous Relaxation Matrix]:::lp_space
-    F[Output: Exact Preference Cost Minimum]:::lp_space
+    D["Hot-Swap Matrix Constraints<br/>SetBounds() per Delta"]:::lp_space
+    E["Solve Continuous Relaxation Matrix"]:::lp_space
+    F["Output: Exact Preference Cost Minimum"]:::lp_space
     D --> E --> F
     end
 
@@ -52,15 +52,15 @@ flowchart TD
     
     subgraph Mathematical Cost Bridge [Global Fitness Evaluation]
     direction LR
-    G(((Pref Cost<br/>+<br/>Acc Cost)))
+    G(("Pref Cost<br/>+<br/>Acc Cost"))
     F --> G
-    H[Accounting Cost Exponentiation<br/>Non-Linear Mathematical Variance]:::penalty
+    H["Accounting Cost Exponentiation<br/>Non-Linear Mathematical Variance"]:::penalty
     H --> G
     end
     
-    G --> I{Is Local Minimum <br/>T-Accepted?}:::validation
+    G --> I{"Is Local Minimum <br/>T-Accepted?"}:::validation
     I -- Reject --> A
-    I -- Accept --> J[Log New Global Best Schedule]:::validation
+    I -- Accept --> J["Log New Global Best Schedule"]:::validation
     J -.-> A
 ```
 
