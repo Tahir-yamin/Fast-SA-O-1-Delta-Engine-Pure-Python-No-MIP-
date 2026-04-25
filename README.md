@@ -2,7 +2,7 @@
 
 **Tahir Yamin** (tahiryamin2050@gmail.com)  
 
-![Scientific Optimization Dashboard](assets/scientific_data_viz.png)
+![Scientific Optimization Dashboard](assets/research_data_viz_final.png)
 *Fig. 1. High-Fidelity Empirical Data Visualization: A multi-panel dashboard illustrating (Top) the stochastic occupancy portfolio with smoothing spline overlays and logarithmic penalty intensity mapping, (Bottom-Left) cost density distribution mapping, and (Bottom-Right) inter-day variance gradient state matrix.*
 
 [![Score](https://img.shields.io/badge/Global_Score-69%2C953-brightgreen)](#)
