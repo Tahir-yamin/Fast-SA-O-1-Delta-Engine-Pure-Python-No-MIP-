@@ -31,13 +31,17 @@ The bounds dictate exactly $5,000$ unique block clusters (families $f \in \mathc
 Let $x_{f,d} \in \{0,1\}$ represent if family $f$ is assigned to day $d$. 
 
 **Constraint (Strict Day-Packing Limits):**
+
 $$ \forall d \in \mathcal{D}: \quad 125 \le \sum_{f=1}^{5000} n_f x_{f,d} \le 300 $$
 
 **Objective 1: Preference Matrix Cost ($P$)**
+
 $$ \min P = \sum_{f=1}^{5000} \sum_{d=1}^{100} C_{pref}(f, d) \cdot x_{f,d} $$
 
 **Objective 2: Exponentiated Accounting Constraint ($A$)**
+
 Let $N_d$ represent the resulting utilization on state $d$. The stability penalty bridges inter-state deviations:
+
 $$ \min A = \sum_{d=1}^{100} \frac{(N_d - 125)}{400} \cdot N_d^{\left(0.5 + \frac{|N_d - N_{d+1}|}{50}\right)} $$
 
 ---
