@@ -81,7 +81,7 @@ try:
     ax3.set_title("Inter-Day Variance Gradient ($|N_d - N_{d+1}|$)", fontsize=11)
     ax3.set_xticks([]); ax3.set_yticks([])
 
-    plt.savefig('assets/scientific_data_viz.png', bbox_inches='tight', dpi=300)
+    plt.savefig('assets/research_data_viz_final.png', bbox_inches='tight', dpi=300)
     print("SUCCESS: High-fidelity scientific visualization generated.")
 
 except Exception as e:
