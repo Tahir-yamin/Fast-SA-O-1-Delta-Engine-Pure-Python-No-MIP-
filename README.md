@@ -50,7 +50,54 @@ To avert the multi-million threshold limits in pure boolean constraint, we formu
 $$ x'_{f,d} \in [0.0, 1.0] $$
 The solver only operates recursively to solve the strictly linear Preference Cost. It does not calculate the Accounting Cost.
 
-### 3.2 Algorithm 1: Profile Matrix Expansion
+### 3.2 Algorithmic Architecture Flow
+To maintain exact feasibility while exploring the non-linear objective space, the engine decouples search from evaluation.
+
+```mermaid
+flowchart TD
+    %% Base Styling
+    classDef abstract_space fill:#1a202c,stroke:#4a5568,stroke-width:2px,color:#e2e8f0
+    classDef lp_space fill:#2d3748,stroke:#cbd5e0,stroke-width:2px,color:#edf2f7
+    classDef validation fill:#276749,stroke:#68d391,stroke-width:2px,color:white
+    classDef penalty fill:#742a2a,stroke:#fc8181,stroke-width:2px,color:white
+    
+    A["Stochastic Meta-Heuristic Engine<br/>Simulated Annealing"]:::abstract_space
+    
+    subgraph Profile Search Space [Dimensional Occupancy Generation]
+    direction TB
+    B["Generate Continuous Occupancy Delta<br/>Δ Day N variance"]:::abstract_space
+    C{"Is Occupancy between<br/> 125 and 300?"}:::abstract_space
+    B --> C
+    C -- No --> B
+    end
+
+    A --> B
+    
+    subgraph Persistent Oracle [High-Speed GLOP LP Matrix]
+    direction TB
+    D["Hot-Swap Matrix Constraints<br/>SetBounds() per Delta"]:::lp_space
+    E["Solve Continuous Relaxation Matrix"]:::lp_space
+    F["Output: Exact Preference Cost Minimum"]:::lp_space
+    D --> E --> F
+    end
+
+    C -- Yes (Feasible) --> D
+    
+    subgraph Mathematical Cost Bridge [Global Fitness Evaluation]
+    direction LR
+    G(("Pref Cost<br/>+<br/>Acc Cost"))
+    F --> G
+    H["Accounting Cost Exponentiation<br/>Non-Linear Mathematical Variance"]:::penalty
+    H --> G
+    end
+    
+    G --> I{"Is Local Minimum <br/>T-Accepted?"}:::validation
+    I -- Reject --> A
+    I -- Accept --> J["Log New Global Best Schedule"]:::validation
+    J -.-> A
+```
+
+### 3.3 Algorithm 1: Profile Matrix Expansion
 Rather than mutating discrete booleans $x_{f,d}$ across $5000$ clusters, simulated annealing executes strictly across a one-dimensional array `target_profile = np.zeros(102)`. 
 
 **Explicit Implementation Parameters:**
@@ -58,7 +105,7 @@ Rather than mutating discrete booleans $x_{f,d}$ across $5000$ clusters, simulat
 * Cooling Topography: $T_{start} = 5.0$, decaying exponentially to $T_{end} = 0.001$.
 * Dimensional Shift Operator: For arbitrary target days $d_1, d_2$, integer variance $\Delta \sim \mathcal{U}(1, 4)$ shifts abstract populations independent of individual assignments.
 
-### 3.3 Micro-Second Matrix Hot-Swapping (`SetBounds()`)
+### 3.4 Micro-Second Matrix Hot-Swapping (`SetBounds()`)
 For each stochastic profile change, the script forces the newly generated dimensional boundary onto the Continuous GLOP matrix array without memory reallocation:
 ```python
 # $O(1)$ Persistent LP Binding Function
