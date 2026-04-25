@@ -38,7 +38,7 @@ $$ \min P = \sum_{f=1}^{5000} \sum_{d=1}^{100} C_{pref}(f, d) \cdot x_{f,d} $$
 
 **Objective 2: Exponentiated Accounting Constraint ($A$)**
 Let $N_d$ represent the resulting utilization on state $d$. The stability penalty bridges inter-state deviations:
-$$ \min A = \sum_{d=1}^{100} \frac{(N_d - 125)}{400} \cdot N_d^{\Big(0.5 + \frac{|N_d - N_{d+1}|}{50}\Big)} $$
+$$ \min A = \sum_{d=1}^{100} \frac{(N_d - 125)}{400} \cdot N_d^{\left(0.5 + \frac{|N_d - N_{d+1}|}{50}\right)} $$
 
 ---
 
@@ -56,7 +56,7 @@ Rather than mutating discrete booleans $x_{f,d}$ across $5000$ clusters, simulat
 **Explicit Implementation Parameters:**
 * Total Iterations: $20,000$ heuristic evaluation jumps.
 * Cooling Topography: $T_{start} = 5.0$, decaying exponentially to $T_{end} = 0.001$.
-* Dimensional Shift Operator: For arbitrary target days $d_1, d_2$, integer variance $\Delta = \operatorname{random}[1, 4]$ shifts abstract populations independent of individual assignments.
+* Dimensional Shift Operator: For arbitrary target days $d_1, d_2$, integer variance $\Delta \sim \mathcal{U}(1, 4)$ shifts abstract populations independent of individual assignments.
 
 ### 3.3 Micro-Second Matrix Hot-Swapping (`SetBounds()`)
 For each stochastic profile change, the script forces the newly generated dimensional boundary onto the Continuous GLOP matrix array without memory reallocation:
