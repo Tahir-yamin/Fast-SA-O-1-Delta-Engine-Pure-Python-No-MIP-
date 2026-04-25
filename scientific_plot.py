@@ -59,7 +59,7 @@ try:
     ax1.axhline(125, color="#e53e3e", linestyle="--", alpha=0.5, label="Min Boundary")
     ax1.axhline(300, color="#e53e3e", linestyle="--", alpha=0.5, label="Max Boundary")
     
-    ax1.set_title("Fig 1. Industrial Load Portfolio: Occupancy vs. Thermodynamic Stability Penalty", fontweight="bold")
+    ax1.set_title("Fig 1. Industrial Load Portfolio: Occupancy vs. Combinatorial Accounting Penalty", fontweight="bold")
     ax1.set_ylabel("Total Capacity ($N_d$)")
     cbar = plt.colorbar(scatter, ax=ax1, fraction=0.046, pad=0.04)
     cbar.set_label("Logarithmic Penalty Intensity")
