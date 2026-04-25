@@ -2,8 +2,8 @@
 
 **Tahir Yamin** (tahiryamin2050@gmail.com)  
 
-![Optimization Landscape](assets/optimization_landscape.png)
-*Fig. 1. Actual Empirical Output: Validated Occupancy Profile (top) bound strictly between constraint limits 125 and 300 across 100 temporal scheduling days, mapped perfectly to the log-scale Non-Linear Exponentiation Accounting Penalty Variance (bottom).*
+![Scientific Optimization Dashboard](assets/scientific_data_viz.png)
+*Fig. 1. High-Fidelity Empirical Data Visualization: A multi-panel dashboard illustrating (Top) the stochastic occupancy portfolio with smoothing spline overlays and logarithmic penalty intensity mapping, (Bottom-Left) cost density distribution mapping, and (Bottom-Right) inter-day variance gradient state matrix.*
 
 [![Score](https://img.shields.io/badge/Global_Score-69%2C953-brightgreen)](#)
 [![Algorithm](https://img.shields.io/badge/Metaheuristic-Simulated_Annealing-blue)](#)
